@@ -30,7 +30,8 @@ static void prv_on_health_data(HealthEventType type, void *context) {
 
 
 static void prv_init() {
-  bool success = health_service_set_heart_rate_sample_period(30);
+  health_service_set_heart_rate_sample_period(30);
+  health_service_set_hrv_sample_period(10);
   health_service_events_subscribe(prv_on_health_data, NULL);
   app_worker_message_subscribe(worker_message_handler);
 }
