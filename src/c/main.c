@@ -48,8 +48,7 @@ static TextLayer *create_label(Layer *parent, GRect frame, const char *text,
 
 const uint32_t inbox_size = 64;
 const uint32_t outbox_size = 256;
-static HealthValue heart_rate = 0;
-static HealthValue hrv = 0;
+static HealthValue health_value = 0;
 
 // Key 2 carries the phone's WebSocket state; key 1 remains heart rate.
 static void set_connection_status(bool connected)
