@@ -17,7 +17,7 @@ static void prv_on_health_data(HealthEventType type, void *context) {
   if (type == HealthEventHeartRateUpdate) {
     heart_rate = health_service_peek_current_value(HealthMetricHeartRateBPM);
     AppWorkerMessage message = {
-    .data0 = heart_rate
+    .data0 = heart_rate,
     .data1 = ppi
     };
     
