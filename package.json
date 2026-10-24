@@ -13,7 +13,7 @@
         ],
         "displayName": "PebbleBeat",
         "enableMultiJS": true,
-        "messageKeys": [],
+        "messageKeys": ["HeartRate", "HeartRateVariability"],
         "projectType": "native",
         "resources": {
             "media": []
