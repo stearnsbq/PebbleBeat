@@ -69,8 +69,9 @@ Pebble.addEventListener('webviewclosed', function(event) {
   try {
     var response = event.response;
     var values = JSON.parse(response);
+    console.log(values);
     var urlChanged = values.WebsocketServer !== values.WebsocketServer;
-    const updated = {"WebSocketServer": values["WebSocketServer"]["value"]};
+    const updated = {"WebsocketServer": values["WebsocketServer"]["value"]};
     clay.setSettings(updated);
     settings = updated;
     if (urlChanged) connect();
