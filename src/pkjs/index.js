@@ -82,7 +82,6 @@ Pebble.addEventListener('webviewclosed', function(event) {
 });
 
 Pebble.addEventListener('appmessage', function(event) {
-  console.log(event);
   reportConnection();
   const heartRate = event.payload['1'];
   const hrv = event.payload['2'];
