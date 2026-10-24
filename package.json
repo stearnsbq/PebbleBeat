@@ -17,6 +17,7 @@
         "messageKeys": [
             "HeartRate",
             "HeartRateVariability",
+            "Battery",
             "WebsocketServer"
         ],
         "projectType": "native",

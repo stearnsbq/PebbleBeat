@@ -97,6 +97,12 @@ static void worker_message_handler(uint16_t type,
 
   dict_write_int32(iter, event_type, health_value);
 
+  BatteryChargeState state = battery_state_service_peek();
+  uint8_t charge_percent = state.charge_percent;
+
+
+  dict_write_int32(iter, 3, charge_percent);
+
   app_message_outbox_send();
 
 }

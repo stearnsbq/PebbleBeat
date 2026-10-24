@@ -1,56 +1,17 @@
 module.exports = [
+  { type: 'heading', defaultValue: 'PebbleBeat' },
   {
-    "type": "heading",
-    "defaultValue": "App Configuration"
-  },
-  {
-    "type": "text",
-    "defaultValue": "Here is some introductory text."
-  },
-  {
-    "type": "section",
-    "items": [
+    type: 'section',
+    items: [
+      { type: 'heading', defaultValue: 'Connection' },
       {
-        "type": "heading",
-        "defaultValue": "Colors"
-      },
-      {
-        "type": "color",
-        "messageKey": "BackgroundColor",
-        "defaultValue": "0x000000",
-        "label": "Background Color"
-      },
-      {
-        "type": "color",
-        "messageKey": "ForegroundColor",
-        "defaultValue": "0xFFFFFF",
-        "label": "Foreground Color"
+        type: 'input',
+        messageKey: 'WebsocketServer',
+        label: 'WebSocket URL',
+        description: 'Use ws:// or wss://, including the port and path if needed.',
+        attributes: { type: 'url', required: true, maxlength: 1024, pattern: 'wss?://[^\\s#]+' }
       }
     ]
   },
-  {
-    "type": "section",
-    "items": [
-      {
-        "type": "heading",
-        "defaultValue": "More Settings"
-      },
-      {
-        "type": "toggle",
-        "messageKey": "SecondTick",
-        "label": "Enable Seconds",
-        "defaultValue": false
-      },
-      {
-        "type": "toggle",
-        "messageKey": "Animations",
-        "label": "Enable Animations",
-        "defaultValue": false
-      }
-    ]
-  },
-  {
-    "type": "submit",
-    "defaultValue": "Save Settings"
-  }
+  { type: 'submit', defaultValue: 'Save Settings' }
 ];
