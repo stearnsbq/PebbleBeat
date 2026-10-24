@@ -53,6 +53,27 @@ const uint32_t inbox_size = 64;
 const uint32_t outbox_size = 256;
 static HealthValue heart_rate = 0;
 
+// Key 2 carries the phone's WebSocket state; key 1 remains heart rate.
+static void set_connection_status(bool connected) {
+  text_layer_set_text(s_caption_layer, connected ? "Connected" : "Disconnected");
+  text_layer_set_text_color(s_caption_layer,
+                           connected ? PBL_IF_COLOR_ELSE(GColorMintGreen, GColorWhite)
+                                     : PBL_IF_COLOR_ELSE(GColorLightGray, GColorWhite));
+}
+
+static void inbox_received_handler(DictionaryIterator *iter, void *context) {
+  Tuple *status = dict_find(iter, 2);
+  if (status) {
+    set_connection_status(status->value->int32 == 1 &&
+                          connection_service_peek_pebble_app_connection());
+  }
+}
+
+static void phone_connection_handler(bool connected) {
+  // A phone connection alone does not confirm the relay is open.
+  set_connection_status(false);
+}
+
 static void worker_message_handler(uint16_t type, 
                                     AppWorkerMessage *message) {
   
@@ -125,7 +146,7 @@ static void main_window_load(Window *window) {
   s_caption_layer = create_label(window_layer,
                                 GRect(0, bounds.size.h - PBL_IF_ROUND_ELSE(30, 25),
                                       bounds.size.w, 22),
-                                "HEART RATE", FONT_KEY_GOTHIC_14,
+                                "Disconnected", FONT_KEY_GOTHIC_14,
                                 PBL_IF_COLOR_ELSE(GColorLightGray, GColorWhite));
   AppWorkerResult result = app_worker_launch();
 }
@@ -151,7 +172,11 @@ static void init(void) {
     
 
   // Open AppMessage
+  app_message_register_inbox_received(inbox_received_handler);
   app_message_open(inbox_size, outbox_size);
+  connection_service_subscribe((ConnectionHandlers) {
+    .pebble_app_connection_handler = phone_connection_handler
+  });
   
 
   
@@ -161,6 +186,8 @@ static void init(void) {
 }
 
 static void deinit(void) {
+  connection_service_unsubscribe();
+  app_message_deregister_callbacks();
   window_destroy(s_main_window);
 }
 
