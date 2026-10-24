@@ -64,9 +64,19 @@ Pebble.addEventListener('showConfiguration', function() {
 });
 
 Pebble.addEventListener('webviewclosed', function(event) {
-  console.log(event)
 
-
+  if (!event || !event.response || event.response === 'CANCELLED') return;
+  try {
+    var response = event.response;
+    var values = JSON.parse(response);
+    var urlChanged = values.WebsocketServer !== values.WebsocketServer;
+    clay.setSettings(values);
+    settings = values;
+    if (urlChanged) connect();
+    else reportConnection();
+  } catch (error) {
+    console.log('Settings were not saved: ' + error.message);
+  }
 });
 
 Pebble.addEventListener('appmessage', function(event) {
