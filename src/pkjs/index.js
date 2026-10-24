@@ -81,6 +81,7 @@ Pebble.addEventListener('webviewclosed', function(event) {
 });
 
 Pebble.addEventListener('appmessage', function(event) {
+  console.log(event);
   reportConnection();
   var heartRate = event.payload['1'];
   if (typeof heartRate === 'number' && socket && socket.readyState === WebSocket.OPEN) {
