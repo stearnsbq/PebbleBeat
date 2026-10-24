@@ -48,8 +48,8 @@ static TextLayer *create_label(Layer *parent, GRect frame, const char *text,
 
 const uint32_t inbox_size = 64;
 const uint32_t outbox_size = 256;
-static HealthValue health_value = 0;
-
+static HealthValue heart_rate = 0;
+static HealthValue ppi = 0;
 // Key 2 carries the phone's WebSocket state; key 1 remains heart rate.
 static void set_connection_status(bool connected)
 {
@@ -82,24 +82,24 @@ static void worker_message_handler(uint16_t type,
 
 
 
-  uint16_t event_type = message->data0;
-  health_value = message->data1;
+  heart_rate = message->data0;
+  ppi = message->data1;
 
   APP_LOG(APP_LOG_LEVEL_DEBUG, "got messaged %d\n", event_type);
 
   static char s_buffer[32];
 
-  snprintf(s_buffer, sizeof(s_buffer), "%d", (int)health_value);
+  snprintf(s_buffer, sizeof(s_buffer), "%d", (int)heart_rate);
 
   text_layer_set_text(s_text_layer, s_buffer);
   DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
 
-  dict_write_int32(iter, event_type, health_value);
+  dict_write_int32(iter, 1, heart_rate);
+  dict_write_int32(iter, 2, ppi);
 
   BatteryChargeState state = battery_state_service_peek();
   uint8_t charge_percent = state.charge_percent;
-
 
   dict_write_int32(iter, 3, charge_percent);
 
