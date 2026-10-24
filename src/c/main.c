@@ -79,11 +79,13 @@ static void worker_message_handler(uint16_t type,
                                    AppWorkerMessage *message)
 {
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "got messaged %d\n", type);
-  // Get the data, only if it was sent from the background
+
+
 
   uint16_t event_type = message->data0;
   health_value = message->data1;
+
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "got messaged %d\n", event_type);
 
   static char s_buffer[32];
 
