@@ -10,7 +10,7 @@ through your paired phone.
 
 1. Install PebbleBeat on your watch and keep it connected to the Pebble phone app.
 2. Run a WebSocket server that your phone can reach.
-3. Open PebbleBeat's settings in the phone app and enter your server's URL,
+3. Open PebbleBeat's settings in the pebble phone app and enter your server's URL,
    such as `ws://192.168.1.100:8080` or `wss://example.com/heartbeat`.
 4. Save the settings, then close and reopen PebbleBeat to connect.
 5. Note: The application must be open in the foreground to send events
