@@ -84,10 +84,11 @@ Pebble.addEventListener('webviewclosed', function(event) {
 Pebble.addEventListener('appmessage', function(event) {
   console.log(event);
   reportConnection();
-  var heartRate = event.payload['1'];
+  const heartRate = event.payload['1'];
+  const battery = event.payload['3'];
   if (typeof heartRate === 'number' && socket && socket.readyState === WebSocket.OPEN) {
     try {
-      socket.send(JSON.stringify({ event: 'heartRate', data: heartRate }));
+      socket.send(JSON.stringify({ heartRate: heartRate, latest_rr_ms: 0, battery: battery }));
     } catch (error) {
       reportConnection();
     }
