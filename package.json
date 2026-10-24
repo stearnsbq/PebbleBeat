@@ -4,14 +4,14 @@
         "osc": "^2.4.5"
     },
     "keywords": [],
-    "name": "vrcosc-hr",
+    "name": "pebblebeat",
     "pebble": {
         "capabilities": [
             "location",
             "configurable",
             "health"
         ],
-        "displayName": "vrcosc-hr",
+        "displayName": "PebbleBeat",
         "enableMultiJS": true,
         "messageKeys": [],
         "projectType": "native",
