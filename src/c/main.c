@@ -83,15 +83,8 @@ static void worker_message_handler(uint16_t type,
   APP_LOG(APP_LOG_LEVEL_DEBUG, "got messaged %d\n", type);
   // Get the data, only if it was sent from the background
 
-  char *event_name = message->data0;
+  uint16_t event_type = message->data0;
   health_value = message->data1;
-
-  int index = 1;
-
-  if (strncmp(event_name, "hrv", 3) == 1)
-  {
-    index = 2;
-  }
 
   static char s_buffer[32];
 
@@ -101,7 +94,7 @@ static void worker_message_handler(uint16_t type,
   DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
 
-  dict_write_int32(iter, index, health_value);
+  dict_write_int32(iter, event_type, health_value);
 
   app_message_outbox_send();
 

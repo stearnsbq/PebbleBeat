@@ -16,7 +16,7 @@ static void prv_on_health_data(HealthEventType type, void *context) {
   if (type == HealthEventHeartRateUpdate) {
     heart_rate = health_service_peek_current_value(HealthMetricHeartRateBPM);
     AppWorkerMessage message = {
-    .data0 = "hr",
+    .data0 = 1,
     .data1 = heart_rate
     };
     
@@ -26,10 +26,10 @@ static void prv_on_health_data(HealthEventType type, void *context) {
     uint16_t ppi = health_service_peek_hrv_ppi_ms();
     if (ppi > 0) {
         AppWorkerMessage message = {
-        .data0 = "hrv",
+        .data0 = 2,
         .data1 = ppi
         };
-        
+
       app_worker_send_message(SOURCE_BACKGROUND, &message);
       // Display the peak-to-peak interval
     }
