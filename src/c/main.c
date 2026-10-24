@@ -79,13 +79,8 @@ static void worker_message_handler(uint16_t type,
                                    AppWorkerMessage *message)
 {
 
-
-
-
   heart_rate = message->data0;
   ppi = message->data1;
-
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "got messaged %d\n", event_type);
 
   static char s_buffer[32];
 
