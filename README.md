@@ -4,6 +4,8 @@ A simple Pebble Time 2 watch app that displays your heart rate and forwards
 heart rate, the latest beat interval, and battery level to a WebSocket server
 through your paired phone.
 
+[Get PebbleBeat on the Pebble App Store](https://apps.repebble.com/cdae49b4b5834598b586d30d)
+
 ![PebbleBeat watch app](docs/screenshot.png)
 
 **Setup**
