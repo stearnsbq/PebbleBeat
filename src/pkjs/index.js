@@ -88,7 +88,7 @@ Pebble.addEventListener('appmessage', function(event) {
   const battery = event.payload['3'];
   if (typeof heartRate === 'number' && socket && socket.readyState === WebSocket.OPEN) {
     try {
-      socket.send(JSON.stringify({ heartRate: heartRate, latest_rr_ms: hrv, battery: battery }));
+      socket.send(JSON.stringify({ bpm: heartRate, latest_rr_ms: hrv, battery: battery }));
     } catch (error) {
       reportConnection();
     }
