@@ -1,6 +1,7 @@
 {
     "author": "quinn50",
     "dependencies": {
+        "@rebble/clay": "^1.1.0",
         "osc": "^2.4.5"
     },
     "keywords": [],
@@ -13,7 +14,11 @@
         ],
         "displayName": "PebbleBeat",
         "enableMultiJS": true,
-        "messageKeys": ["HeartRate", "HeartRateVariability"],
+        "messageKeys": [
+            "HeartRate",
+            "HeartRateVariability",
+            "WebsocketServer"
+        ],
         "projectType": "native",
         "resources": {
             "media": []
